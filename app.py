@@ -42,10 +42,9 @@ def predict():
 
         if(prediction==0):
             prediction_txt="Good To go !! No Defect Will Be Produced"
-            
         elif(prediction==1):
             prediction_txt="Sorry Porosity Defect will Happen"
-        else:
+        elif(prediction==2):
             prediction_txt="Sorry Tungsten Inclusion Defect might happen"
         print(prediction)
         return render_template ("predict.html",prediction_text="{}".format(prediction_txt),predval=prediction)
