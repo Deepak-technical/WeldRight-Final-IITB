@@ -28,12 +28,12 @@ def home():
 @app.route('/prediction',methods=['POST','GET'])
 def predict():
     if request.method == 'POST':
-        current = int(request.form['current'])
-        humidity = int(request.form['humidity'])
-        temperature = int(request.form['temperature'])
-        flow = int(request.form['flow'])
-        jobTemp = int(request.form['jobTemp'])
-        voltage= int(request.form['voltage'])
+        current = float(request.form['current'])
+        humidity = float(request.form['humidity'])
+        temperature = float(request.form['temperature'])
+        flow = float(request.form['flow'])
+        jobTemp = float(request.form['jobTemp'])
+        voltage=float(request.form['voltage'])
        
 
 
@@ -41,13 +41,14 @@ def predict():
         prediction=model.predict(data)
 
         if(prediction==0):
-            prediction="Good To go !! No Defect Will Be Produced"
+            prediction_txt="Good To go !! No Defect Will Be Produced"
+            
         elif(prediction==1):
-            prediction="Sorry Porosity Defect will Happen"
+            prediction_txt="Sorry Porosity Defect will Happen"
         else:
-            prediction="Sorry Tungsten Defect might happen"
+            prediction_txt="Sorry Tungsten Inclusion Defect might happen"
         print(prediction)
-        return render_template ("predict.html",prediction_text="{}".format(prediction))
+        return render_template ("predict.html",prediction_text="{}".format(prediction_txt),predval=prediction)
 
     else:
         return render_template("predict.html")
